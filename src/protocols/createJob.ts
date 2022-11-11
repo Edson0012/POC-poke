@@ -4,6 +4,9 @@ type poke = {
     weight: number,
 }
 
+type poketype = Omit<poke, "typeId" | "weight">
+
 export {
-    poke
+    poke,
+    poketype
 }
