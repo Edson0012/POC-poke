@@ -12,7 +12,9 @@ export function validateSchema(schema: ObjectSchema) {
         (err: any) => err.message
       );
 
-      return messageError
+        console.log(messageError);
+
+      return res.status(422).send(messageError); 
     }
 
     next();
