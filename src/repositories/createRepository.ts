@@ -3,7 +3,7 @@ import { QueryResult } from "pg";
 import { poke, poketype } from "../protocols/createJob";
 
 async function insertPoke(create: poke) {
-    await connection.query(`
+    connection.query(`
     INSERT INTO pokemon (name, weight, "typeId") VALUES ($1, $2, $3);
     `,[create.name, create.weight, create.typeId])
 };
@@ -17,11 +17,24 @@ async function typeList (): Promise<QueryResult<poketype>>{
 }
 
 async function verifyPokeExist(id: number): Promise<QueryResult<poketype>>{
-    return await connection.query(`SELECT pokemon.name FROM pokemon WHERE pokemon.id = $1;`, [id])
+    return  connection.query(`SELECT pokemon.name FROM pokemon WHERE pokemon.id = $1;`, [id])
 }
 
 async function deletePoke(id: number){
-    await connection.query(`DELETE FROM pokemon WHERE pokemon.id = $1`, [id])
+    connection.query(`DELETE FROM pokemon WHERE pokemon.id = $1`, [id])
+}
+
+async function updatePokeCreate(id: number, poke: poke){
+    connection.query(`UPDATE pokemon SET name = $1, weight = $2, "typeId" = $3 WHERE pokemon.id = $4;`,
+    [poke.name, poke.weight, poke.typeId, id])
+}
+
+async function pokeMaxWeight(): Promise<QueryResult<poke>>{
+    return connection.query(`SELECT pokemon.name, MAX(weight) as weight, types.name as type FROM pokemon
+    JOIN types ON pokemon."typeId" = types.id
+    GROUP BY pokemon.id, types.id
+    ORDER BY pokemon.weight DESC
+    ;`)
 }
 
 export {
@@ -29,5 +42,7 @@ export {
     verifyPokeName,
     typeList,
     verifyPokeExist,
-    deletePoke
+    deletePoke,
+    updatePokeCreate,
+    pokeMaxWeight
 }
