@@ -83,7 +83,7 @@ Find a pokémon by id and edit/update it by sending a body in the format.
 
 Return OK
 
-**Body**
+**Body:**
 ```json 
 {
   "name": "horsea",
