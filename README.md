@@ -2,6 +2,14 @@
 A simple CRUD pokémon creation site page that I created while learning typescript.
 
 ___
+## ***npx nodemon src/app.ts***
+to start the app use the "npx nodemon src/app.ts", the application is starting on PORT 4000
+
+___
+## **database** 
+to get the functionality of the application you must create a database with the characteristics of the dump.sql
+
+___
 ## Routes
 All routes are prefixed with **/poke**, so a **GET /** route described below means **GET /poke**, and a **GET /:id** route means **GET /poke /:id** and so on.
 
