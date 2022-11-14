@@ -6,7 +6,7 @@ import { pokeSchema } from "../schemas/creationSchemas";
 const router = Router();
 
 router.post('/poke', validateSchema(pokeSchema), postCreatePokeFunction );
-router.get('/type', getListTypesPoke);
+router.get('/poke/type', getListTypesPoke);
 router.delete('/poke/:id',deletePokeCreate);
 router.put('/poke/:id', updatePoke);
 router.get('/poke' , getPokeMaxWeight);

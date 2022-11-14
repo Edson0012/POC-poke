@@ -13,12 +13,12 @@ export async function postCreatePokeFunction(req: Request, res: Response) {
         const {rows: verifyNameExist}  = await createRepository.verifyPokeName(create);
 
         if(verifyNameExist[0]){
-            return res.status(409).send('pokemon name already exists')
+            return res.status(409).send('pokémon name already exists')
         }
 
         await createRepository.insertPoke(create); 
 
-       return res.status(200).send('pokemon created');
+       return res.status(201).send('pokémon created');
     }catch(err){
         console.log(err)
        return res.status(500).send('server error')
@@ -51,7 +51,7 @@ export async function deletePokeCreate(req: Request, res: Response) {
         const {rows: verifyPokeId} = await createRepository.verifyPokeExist(Number(id));
 
         if(!verifyPokeId[0]){
-            return res.status(404).send('pokemon not exist')
+            return res.status(404).send('pokémon not exist')
         }
 
         await createRepository.deletePoke(Number(id));
@@ -76,7 +76,7 @@ export async function updatePoke(req: Request, res: Response) {
         const {rows: pokeExist} = await createRepository.verifyPokeExist(Number(id));
 
         if(!pokeExist[0]){
-            return res.status(404).send('pokemon not exist')
+            return res.status(404).send('pokémon not exist')
         }
 
         await createRepository.updatePokeCreate(Number(id), poke)
