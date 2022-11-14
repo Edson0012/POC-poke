@@ -9,6 +9,10 @@ ___
 ## **database** 
 to get the functionality of the application you must create a database with the characteristics of the dump.sql
 
+There is a dump.sql file where you can find some sample data. In a terminal at the root folder, just run the command below to get started:
+```json 
+psql -d <your_database_name> -f dump.sql
+```
 ___
 ## Routes
 All routes are prefixed with **/poke**, so a **GET /** route described below means **GET /poke**, and a **GET /:id** route means **GET /poke /:id** and so on.
